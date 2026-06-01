@@ -1,0 +1,27 @@
+# STE DDPM training: CelebA-HQ 256x256 (primary) + poison data (shadow @ offset 1000)
+# Equivalent CLI:
+#   python train.py --train_type ddpm --dataset_mode celeba_poison_256 \
+#       --clean_dir ./data/celeba_hq_256 --poison_dir ./data/poison_data \
+#       --output_dir outputs/ste_celeba_256 \
+#       --image_size 256 --batch_size 8 --epochs 20 --lr 1e-5 \
+#       --ratios 0.5 0.5 --offset_mode explicit --offsets 0 1000 \
+#       --num_class_embeds 2 --save_every 5
+
+train_type: ddpm
+dataset_mode: celeba_poison_256
+image_size: 256
+batch_size: 8
+epochs: 20
+lr: 1.0e-5
+ema_decay: 0.9999
+ratios: [0.5, 0.5]
+offset_mode: explicit
+offsets: [0, 1000]
+num_train_timesteps: 1000
+schedule_type: linear
+num_class_embeds: 2
+save_every: 5
+seed: 42
+# Set paths at CLI:
+#   --clean_dir ./data/celeba_hq_256
+#   --poison_dir ./data/poison_data
